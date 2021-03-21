@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice Work1</title>
+    <style>
+        body{
+            display: grid;
+            justify-content: center;
+        }
+
+        section{
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+
+        /* BONUS */
+        /* ADD STYLE TO YOUR WORK */
+    </style>
+</head>
+<body>
+    <header>
+        <h1>NAME OF STUDENTS PER CLASS</h1>
+    </header>
+    <section>
+        <div>
+            <h3>Grade 10</h3>
+            <ol id="grade-10">
+                <!-- TODO 4 -->
+                <!-- YOUR LIST ITEMS GO HERE -->
+            </ol>
+        </div>
+
+        <div>
+            <h3>Grade 11</h3>
+            <ol id="grade-11">
+                <!-- TODO 5 -->
+                <!-- YOUR LIST ITEMS GO HERE -->
+            </ol>
+        </div>
+
+        <div>
+            <h3>Grade 12</h3>
+            <ol id="grade-12">
+                <!-- TODO 6 -->
+                <!-- YOUR LIST ITEMS GO HERE -->
+            </ol>
+        </div>
+    </section>
+
+    <script>
+        // TODO 3
+        // MAKE A GET REQUEST HERE AND DISPLAY THE RESPONSE IN THE LIST ELEMENTS ABOVE
+        fetch('/names')
+        .then(resp => resp.json())
+        .then(data => {
+            if(data.status === 0){
+                let tenth_grade = data.data["10th grade"];
+                let eleventh_grade = data.data["11th grade"];
+                let twelveth_grade = data.data["12th grade"]
+                // 10 grade
+                tenth_grade.forEach(ele => {
+                    let students = ele;
+                    document.getElementById('grade-10').insertAdjacentHTML('beforeend', `<li>${students}</li>`);
+                });
+                // 11th grade
+                eleventh_grade.forEach(ele => {
+                    let students = ele;
+                    document.getElementById('grade-11').insertAdjacentHTML('beforeend', `<li>${students}</li>`);
+                });
+                // 12th grade
+                twelveth_grade.forEach(ele => {
+                    let students = ele;
+                    document.getElementById('grade-12').insertAdjacentHTML('beforeend', `<li>${students}</li>`);
+                });
+            }
+            else{
+                console.log('--ERROR--')
+            }
+        })
+    </script>
+</body>
+</html>
